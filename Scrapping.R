@@ -1,7 +1,11 @@
+# Load library ------------------------------------------------------------
+
 library(rvest)
 library(dplyr)
 library(NLP)
 
+
+# First page pictures extraction ------------------------------------------
 
 planespotter <- read_html("https://www.planespotters.net/photos/latest?page=1")
 
@@ -23,6 +27,8 @@ for(j in 1:47) {
   
   download.file(imgsrc, destfile = basename(imgsrc))
 }
+
+# entire website images extraction ----------------------------------------
 
 for (i in 1:125){
   planespotter_url <- paste("https://www.planespotters.net/photos/latest?page=",i, sep = "")
