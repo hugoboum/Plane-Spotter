@@ -12,9 +12,6 @@ planespotter <- read_html("https://www.planespotters.net/photos/latest?page=1")
 img <- planespotter %>%
   html_node(xpath = '//*/img')
 
-constructor_html <- planespotter %>%
-  html_node('#1026438')
-
 constructor <- xml_attrs(xml_child(xml_child(xml_child(xml_child(constructor_html, 1), 2), 1), 4))[["title"]] %>% 
                stringr::str_replace( "Search for Manufacturer: ", "")
 
@@ -25,7 +22,7 @@ imgalt <- html_attr(img, 'alt')
 imgsrc <- html_attr(img, 'src')
 imgsrc_split <- strsplit(imgsrc, "_")
 img_number <- as.integer(imgsrc_split[[1]][3])
-download.file(imgsrc, destfile = paste0('Images/',aircraft_type, '-', img_number, '.jpg'))
+download.file(imgsrc, destfile =  paste0('Images/',aircraft_type, '-', img_number, '.jpg'))
 aicrafts <- data_frame(constructor = constructor, aircraft_type = aircraft_type)
 for(j in 1:47) {
   img_numbera <- img_number - j
@@ -50,7 +47,7 @@ write.csv(aicrafts, file = "aicrafts.csv")
 
 # entire website images extraction ----------------------------------------
 
-aicrafts <- matrix(ncol = 1, nrow = 48*2)
+aicrafts <- matrix(ncol = 3, nrow = 48*2)
 nb <- 0
 for (i in 1:2){
   nb <- nb+1
@@ -59,12 +56,23 @@ for (i in 1:2){
   img <- planespotter %>%
     html_node(xpath = '//*/img')
   
+  constructor_html <- planespotter %>%
+    html_nodes(paste0('#', img_number, " a")) %>% 
+    html_attr('href')
+  
+  constructor <- stringr::str_replace(constructor_html[4], "/photos/manufacturer/", "")
+  aircraft_type <- stringr::str_replace(constructor_html[5], paste0('/photos/aircraft/',constructor, '/' ), "")
+  airline <- stringr::str_replace(constructor_html[3], "/airline/", "")
+  
   imgalt <- html_attr(img, 'alt')
   imgsrc <- html_attr(img, 'src')
   imgsrc_split <- strsplit(imgsrc, "_")
   img_number <- as.integer(imgsrc_split[[1]][3])
-  download.file(imgsrc, destfile = paste0('Images/',imgalt, '.jpg'))
-  aicrafts[nb] <- imgalt
+  download.file(imgsrc, destfile = paste0('Images/',constructor, '-', aircraft_type, '-', nb, '.jpg'))
+  aicrafts[nb, 1] <- constructor
+  aicrafts[nb, 2] <- aircraft_type
+  aicrafts[nb, 3] <- airline
+  
   for(j in 1:47) {
     nb <- nb+1
     img_numbera <- img_number - j
@@ -72,16 +80,29 @@ for (i in 1:2){
     
     img <- planespotter %>%
       html_node(node_id) 
+    
+    constructor_html <- planespotter %>%
+      html_nodes(paste0('#', img_numbera, " a")) %>% 
+      html_attr('href')
+    
+    constructor <- stringr::str_replace(constructor_html[4], "/photos/manufacturer/", "")
+    aircraft_type <- stringr::str_replace(constructor_html[5], paste0('/photos/aircraft/',constructor, '/' ), "")
+    airline <- stringr::str_replace(constructor_html[3], "/airline/", "")
+    
     imgalt <- html_attr(img, 'alt')
     imgsrc <- html_attr(img, 'src')
-    aicrafts[nb] <- imgalt
+    aicrafts[nb, 1] <- constructor
+    aicrafts[nb, 2] <- aircraft_type
+    aicrafts[nb, 3] <- airline
     if(is.na(imgsrc)){ Sys.sleep(0.5)
     }else{
-      download.file(imgsrc, destfile = paste0('Images/',imgalt, '.jpg'))
+      download.file(imgsrc, destfile = paste0('Images/',constructor, '-', aircraft_type, '-', nb, '.jpg'))
     }
   }
 }
-write.csv(aicrafts, file = "aicrafts.csv")
-
+aircrafts <- data_frame(constructor = aicrafts[,1], aircraft_type = aicrafts[,2], airline = aicrafts[,2])
+write.csv(aircrafts, file = "aicrafts.csv")
+length(list.files("Images/", pattern="jpg"))
+dim(aicrafts)
 
 
