@@ -56,6 +56,11 @@ for (i in 1:2){
   img <- planespotter %>%
     html_node(xpath = '//*/img')
   
+  imgalt <- html_attr(img, 'alt')
+  imgsrc <- html_attr(img, 'src')
+  imgsrc_split <- strsplit(imgsrc, "_")
+  img_number <- as.integer(imgsrc_split[[1]][3])
+  
   constructor_html <- planespotter %>%
     html_nodes(paste0('#', img_number, " a")) %>% 
     html_attr('href')
@@ -64,11 +69,7 @@ for (i in 1:2){
   aircraft_type <- stringr::str_replace(constructor_html[5], paste0('/photos/aircraft/',constructor, '/' ), "")
   airline <- stringr::str_replace(constructor_html[3], "/airline/", "")
   
-  imgalt <- html_attr(img, 'alt')
-  imgsrc <- html_attr(img, 'src')
-  imgsrc_split <- strsplit(imgsrc, "_")
-  img_number <- as.integer(imgsrc_split[[1]][3])
-  download.file(imgsrc, destfile = paste0('Images/',constructor, '-', aircraft_type, '-', nb, '.jpg'))
+  download.file(imgsrc, destfile = paste0('Images/',constructor, '.', nb, '.jpg'))
   aicrafts[nb, 1] <- constructor
   aicrafts[nb, 2] <- aircraft_type
   aicrafts[nb, 3] <- airline
@@ -96,7 +97,7 @@ for (i in 1:2){
     aicrafts[nb, 3] <- airline
     if(is.na(imgsrc)){ Sys.sleep(0.5)
     }else{
-      download.file(imgsrc, destfile = paste0('Images/',constructor, '-', aircraft_type, '-', nb, '.jpg'))
+      download.file(imgsrc, destfile = paste0('Images/',constructor, '.', nb, '.jpg'))
     }
   }
 }
