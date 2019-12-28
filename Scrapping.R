@@ -47,9 +47,9 @@ write.csv(aicrafts, file = "aicrafts.csv")
 
 # entire website images extraction ----------------------------------------
 
-aicrafts <- matrix(ncol = 3, nrow = 48*55)
+aicrafts <- matrix(ncol = 3, nrow = 48*125)
 nb <- 0
-for (i in 1:55){
+for (i in 1:125){
   nb <- nb+1
   planespotter_url <- paste("https://www.planespotters.net/photos/latest?page=",i, sep = "")
   planespotter <- read_html(planespotter_url)
@@ -70,9 +70,9 @@ for (i in 1:55){
   airline <- stringr::str_replace(constructor_html[3], "/airline/", "")
   
   download.file(imgsrc, destfile = paste0('Images/',constructor, '.', nb, '.jpg'))
-  aicrafts[nb, 1] <- constructor
-  aicrafts[nb, 2] <- aircraft_type
-  aicrafts[nb, 3] <- airline
+  aicrafts[(nb-co), 1] <- constructor
+  aicrafts[(nb-co), 2] <- aircraft_type
+  aicrafts[(nb-co), 3] <- airline
   
   for(j in 1:47) {
     nb <- nb+1
@@ -92,9 +92,9 @@ for (i in 1:55){
       
     imgalt <- html_attr(img, 'alt')
     imgsrc <- html_attr(img, 'src')
-    aicrafts[nb, 1] <- constructor
-    aicrafts[nb, 2] <- aircraft_type
-    aicrafts[nb, 3] <- airline
+    aicrafts[(nb-co), 1] <- constructor
+    aicrafts[(nb-co), 2] <- aircraft_type
+    aicrafts[(nb-co), 3] <- airline
     if(is.na(imgsrc)){ Sys.sleep(0.5)
     }else{
       download.file(imgsrc, destfile = paste0('Images/',constructor, '.', nb, '.jpg'))
@@ -102,7 +102,7 @@ for (i in 1:55){
   }
 }
 aircrafts <- data_frame(constructor = aicrafts[,1], aircraft_type = aicrafts[,2], airline = aicrafts[,3])
-write.csv(aircrafts, file = "aicrafts.csv")
+write.table(aircrafts, file = "aicrafts.csv", append = T)
 View(aircrafts)
 length(list.files("Images/", pattern="jpg"))
 dim(aicrafts)

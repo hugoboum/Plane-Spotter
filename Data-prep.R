@@ -22,22 +22,22 @@ test_airbus_dir <- file.path(test_dir, "Airbus")
 dir.create(test_airbus_dir)
 test_boeing_dir <- file.path(test_dir, "Boeing")
 dir.create(test_boeing_dir)
-fnames <- paste0("Airbus.", 1:1000, ".jpg")
+fnames <- paste0("Airbus.", 1:4000, ".jpg")
 file.copy(file.path(original_dataset_dir, fnames),
           file.path(train_airbus_dir))
-fnames <- paste0("Airbus.", 1001:1500, ".jpg")
+fnames <- paste0("Airbus.", 4001:5000, ".jpg")
 file.copy(file.path(original_dataset_dir, fnames),
           file.path(validation_airbus_dir))
-fnames <- paste0("Airbus.", 1501:2000, ".jpg")
+fnames <- paste0("Airbus.", 5001:5497, ".jpg")
 file.copy(file.path(original_dataset_dir, fnames),
           file.path(test_airbus_dir))
-fnames <- paste0("Boeing.", 1:1000, ".jpg")
+fnames <- paste0("Boeing.", 1:4000, ".jpg")
 file.copy(file.path(original_dataset_dir, fnames),
           file.path(train_boeing_dir))
-fnames <- paste0("Boeing.", 1001:1500, ".jpg")
+fnames <- paste0("Boeing.", 4001:5000, ".jpg")
 file.copy(file.path(original_dataset_dir, fnames),
           file.path(validation_boeing_dir))
-fnames <- paste0("Boeing.", 1501:2000, ".jpg")
+fnames <- paste0("Boeing.", 5001:5497, ".jpg")
 file.copy(file.path(original_dataset_dir, fnames),
           file.path(test_boeing_dir))
 

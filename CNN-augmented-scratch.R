@@ -1,5 +1,10 @@
 library(keras)
 
+base_dir <- "Airbus-and-Boeing"
+train_dir <- file.path(base_dir, "train")
+validation_dir <- file.path(base_dir, "validation")
+train_airbus_dir <- file.path(train_dir, "Airbus")
+
 # Setting up a data augmentation configuration ----------------------------
 
 datagen <- image_data_generator(
@@ -93,7 +98,7 @@ history <- model %>% fit_generator(
   validation_steps = 50
 )
 
-model %>% save_model_hdf5("plane-spotter_2.h5")
+model %>% save_model_hdf5("plane-spotter_augmented_full.h5")
 
 jpeg('history-CNN-augmented-scratch.jpg')
 plot(history)

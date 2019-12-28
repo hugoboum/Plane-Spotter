@@ -1,5 +1,10 @@
 # Feature extraction with data augmentation
 library(keras)
+
+base_dir <- "Airbus-and-Boeing"
+train_dir <- file.path(base_dir, "train")
+validation_dir <- file.path(base_dir, "validation")
+
 conv_base <- application_vgg16(
   weights = "imagenet",
   include_top = FALSE,

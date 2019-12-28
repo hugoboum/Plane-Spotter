@@ -1,5 +1,9 @@
 library(keras)
 
+base_dir <- "Airbus-and-Boeing"
+train_dir <- file.path(base_dir, "train")
+validation_dir <- file.path(base_dir, "validation")
+
 model <- keras_model_sequential() %>%
   layer_conv_2d(filters = 32, kernel_size = c(3, 3), activation = "relu",
                 input_shape = c(150, 150, 3)) %>%
@@ -52,9 +56,9 @@ history <- model %>% fit_generator(
   validation_steps = 50
 )
 
-model %>% save_model_hdf5("plane-spotter.h5")
+model %>% save_model_hdf5("plane-spotter_full.h5")
 
-jpeg('history-CNN-scratch.jpg')
+jpeg('history-CNN-scratch_full.jpg')
 plot(history)
 dev.off()
 
