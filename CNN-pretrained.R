@@ -8,7 +8,7 @@ conv_base <- application_vgg16(
 
 conv_base
 
-base_dir <- "~/Downloads/cats_and_dogs_small"
+base_dir <- "Airbus-and-Boeing"
 train_dir <- file.path(base_dir, "train")
 validation_dir <- file.path(base_dir, "validation")
 test_dir <- file.path(base_dir, "test")
@@ -42,7 +42,7 @@ extract_features <- function(directory, sample_count) {
     labels = labels
   )
 }
-train <- extract_features(train_dir, 2000)
+train <- extract_features(train_dir, 775)
 validation <- extract_features(validation_dir, 1000)
 test <- extract_features(test_dir, 1000)
 
@@ -71,3 +71,11 @@ history <- model %>% fit(
   batch_size = 20,
   validation_data = list(validation$features, validation$labels)
 )
+
+plot(history)
+
+model %>% save_model_hdf5("plane-spotter_pretrained_1.h5")
+
+jpeg('history-CNN-pretrained.jpg')
+plot(history)
+dev.off()

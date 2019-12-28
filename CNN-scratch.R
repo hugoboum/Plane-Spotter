@@ -1,5 +1,4 @@
 library(keras)
-use_python("/usr/bin/python3")
 
 model <- keras_model_sequential() %>%
   layer_conv_2d(filters = 32, kernel_size = c(3, 3), activation = "relu",
@@ -55,4 +54,7 @@ history <- model %>% fit_generator(
 
 model %>% save_model_hdf5("plane-spotter.h5")
 
+jpeg('history-CNN-scratch.jpg')
 plot(history)
+dev.off()
+
