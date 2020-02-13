@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Part 5 Putting into production | Smart Data Project</title>
+  <meta name="description" content="This document is our report for the Smart Data Project with Equancy" />
+  <meta name="generator" content="bookdown 0.17.2 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Part 5 Putting into production | Smart Data Project" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This document is our report for the Smart Data Project with Equancy" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Part 5 Putting into production | Smart Data Project" />
+  
+  <meta name="twitter:description" content="This document is our report for the Smart Data Project with Equancy" />
+  
+
+<meta name="author" content="Hugo Brehier, Florentin Coeurdoux" />
+
+
+<meta name="date" content="2020-02-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="deep-learning.html"/>
+<link rel="next" href="conclusion.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#initial-problem"><i class="fa fa-check"></i><b>1.1</b> Initial problem</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#outline"><i class="fa fa-check"></i><b>1.2</b> Outline</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="web-scrapping.html"><a href="web-scrapping.html"><i class="fa fa-check"></i><b>2</b> Web Scrapping</a><ul>
+<li class="chapter" data-level="2.1" data-path="web-scrapping.html"><a href="web-scrapping.html#what-is-web-scraping"><i class="fa fa-check"></i><b>2.1</b> What is Web Scraping?</a></li>
+<li class="chapter" data-level="2.2" data-path="web-scrapping.html"><a href="web-scrapping.html#the-available-data"><i class="fa fa-check"></i><b>2.2</b> The available data</a></li>
+<li class="chapter" data-level="2.3" data-path="web-scrapping.html"><a href="web-scrapping.html#website-extraction"><i class="fa fa-check"></i><b>2.3</b> Website extraction</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>3</b> Exploratory Data Analysis</a><ul>
+<li class="chapter" data-level="3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#load-the-data"><i class="fa fa-check"></i><b>3.1</b> Load the data</a></li>
+<li class="chapter" data-level="3.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#top-constructor"><i class="fa fa-check"></i><b>3.2</b> Top constructor</a></li>
+<li class="chapter" data-level="3.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#top-airlines"><i class="fa fa-check"></i><b>3.3</b> Top airlines</a></li>
+<li class="chapter" data-level="3.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#proportion-of-model-for-airbus"><i class="fa fa-check"></i><b>3.4</b> Proportion of model for Airbus</a></li>
+<li class="chapter" data-level="3.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#proportion-of-model-for-boeing"><i class="fa fa-check"></i><b>3.5</b> Proportion of model for Boeing</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>4</b> Deep Learning</a><ul>
+<li class="chapter" data-level="4.1" data-path="deep-learning.html"><a href="deep-learning.html#overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="deep-learning.html"><a href="deep-learning.html#model"><i class="fa fa-check"></i><b>4.2</b> Model</a></li>
+<li class="chapter" data-level="4.3" data-path="deep-learning.html"><a href="deep-learning.html#performance-check"><i class="fa fa-check"></i><b>4.3</b> Performance check</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="putting-into-production.html"><a href="putting-into-production.html"><i class="fa fa-check"></i><b>5</b> Putting into production</a><ul>
+<li class="chapter" data-level="5.1" data-path="putting-into-production.html"><a href="putting-into-production.html#rest-api-with-plumber"><i class="fa fa-check"></i><b>5.1</b> REST API with Plumber</a></li>
+<li class="chapter" data-level="5.2" data-path="putting-into-production.html"><a href="putting-into-production.html#docker"><i class="fa fa-check"></i><b>5.2</b> Docker</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Smart Data Project</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="putting-into-production" class="section level1">
+<h1><span class="header-section-number">Part 5</span> Putting into production</h1>
+<div id="rest-api-with-plumber" class="section level2">
+<h2><span class="header-section-number">5.1</span> REST API with Plumber</h2>
+<p>Technically, API stands for Application Program Interface — a name that’s both exactly what an API is and too vague to actually convey any meaning. But what are API’s really? They’re a simple way to set up a computer to pass information to other computers through the internet. 95% of the time, when people say API they mean a RESTful API, which is an API that uses HTTP to interact with other computers. HTTP is the same protocol your browser is using for you to read websites. When you type in a URL to a website, a computer receives your request and sends back HTML. RESTful API’s are the same thing, but instead of HTML they send back text or data.</p>
+<p>When you call an API you typically do one of two things. You either request that computer to send you a specific piece of information (like the weather of a certain city you requested), or you ask the other computer to change the data it has stored (like adding a record to a table). Most simply, API’s are ways to — from your computer — call a function on another computer.</p>
+<p>The easiest way to create an API in R is using the library plumber (<span class="citation">Trestle Technology, LLC (<a href="#ref-R-plumber">2018</a>)</span>), a package which can convert existing R code into an API with just a few extra lines.</p>
+<p>First, we create a script that loads the data and trains the model.</p>
+<p><strong>runtime_functions.R</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">library</span>(keras)</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">model &lt;-<span class="st"> </span><span class="kw">load_model_hdf5</span>(<span class="st">&quot;plane-spotter_pretrained_fine_tuning.h5&quot;</span>)</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">image_prediction &lt;-<span class="st"> </span><span class="cf">function</span>(path){</a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">  image &lt;-<span class="st"> </span><span class="kw">image_load</span>(path, <span class="dt">target_size =</span> <span class="kw">c</span>(<span class="dv">150</span>,<span class="dv">150</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="st">    </span><span class="kw">image_to_array</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="st">    </span><span class="kw">array_reshape</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">150</span>, <span class="dv">150</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb11-9" data-line-number="9">  image_tensor &lt;-<span class="st"> </span>image<span class="op">/</span><span class="dv">255</span></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10">  pred &lt;-<span class="st"> </span><span class="kw">predict_classes</span>(model, image_tensor)</a>
+<a class="sourceLine" id="cb11-11" data-line-number="11">  <span class="cf">if</span>(pred <span class="op">==</span><span class="st"> </span><span class="dv">0</span>){</a>
+<a class="sourceLine" id="cb11-12" data-line-number="12">    <span class="kw">return</span>(<span class="st">&quot;Airbus&quot;</span>)</a>
+<a class="sourceLine" id="cb11-13" data-line-number="13">  } <span class="cf">else</span>{</a>
+<a class="sourceLine" id="cb11-14" data-line-number="14">    <span class="kw">return</span>(<span class="st">&quot;Boeing&quot;</span>)</a>
+<a class="sourceLine" id="cb11-15" data-line-number="15">  }</a>
+<a class="sourceLine" id="cb11-16" data-line-number="16">}</a>
+<a class="sourceLine" id="cb11-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb11-18" data-line-number="18"><span class="kw">image_prediction</span>(<span class="st">&quot;Plumber/Boeing.5023.jpg&quot;</span>)</a></code></pre></div>
+<p>The output is “Boeing”</p>
+<p>Then we built the GET endpoint :</p>
+<p><strong>rest_controller.R</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">source</span>(<span class="st">&quot;runtime_functions.R&quot;</span>)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co"># Set an endpoint to return a pet name</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#* @get /names</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">get_names &lt;-<span class="st"> </span><span class="cf">function</span>(){</a>
+<a class="sourceLine" id="cb12-6" data-line-number="6">  <span class="kw">image_prediction</span>(<span class="st">&quot;Plumber/Boeing.5023.jpg&quot;</span>)</a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">}</a></code></pre></div>
+<p>Here for the purpose of the exemple we predict a known image but the aim of the API is to get the image path as the input of the function.</p>
+<p>Finally, we need to use plumber to set up our R code to accept HTTP requests and transform them into executable R code.</p>
+<p>We simply:</p>
+<ol style="list-style-type: decimal">
+<li>Import plumber.</li>
+<li>Show plumber where our endpoints are.</li>
+<li>Start the API service on port 80.
+Since HTTP defaults to port 80, our service to that port allows things we type in our browser to be executed in the R on our computer.</li>
+</ol>
+<p><strong>Main.R</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">library</span>(plumber)</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">r &lt;-<span class="st"> </span><span class="kw">plumb</span>(<span class="st">&quot;rest_controller.R&quot;</span>)</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">r<span class="op">$</span><span class="kw">run</span>(<span class="dt">port=</span><span class="dv">80</span>, <span class="dt">host=</span><span class="st">&quot;0.0.0.0&quot;</span>)</a></code></pre></div>
+<p>Great, now we can see the result of the output either by typing curl -X GET “<a href="http://127.0.0.1:6974/names" class="uri">http://127.0.0.1:6974/names</a>” -H “accept: application / json” on the terminal or directly by going to <a href="http://127.0.0.1:6974/names" class="uri">http://127.0.0.1:6974/names</a> in your browser.</p>
+</div>
+<div id="docker" class="section level2">
+<h2><span class="header-section-number">5.2</span> Docker</h2>
+<p>As a data scientist, we sometimes want to have code running in places that are not our computer. In our case, we want to have our R script run an API continuously, regardless of if our laptop runs out of battery.
+One way we could set this up would be to create a virtual machine in a place like Amazon Web Services. A virtual machine is like a computer that you’ve used before, but it’s simulated–it doesn’t have it’s own process, memory, or hardware. Instead, a different computer is running the machine. Virtual machines are great because many of them can run on a single server, and they can be easily started and stopped.</p>
+<p>Docker is a way to make the process of configuring and running computers smoother. With Docker, you can create a single document that specifies how to set up the computer. The document lets you run these steps at a moments notice. More formally, docker is a way to run virtual machines as containers, which are lightweight executable packages of software. A container is an instance of an image, which is a snapshot of a computer at a moment in time. Images can be full snapshots, or they can just be a small addition to an earlier image. A dockerfile is the specification document for how to build the image.</p>
+<p>So we try to use the API we created as the code we want in our docker container. We’ll start with an image already setup to have Linux on it. Then we’ll create an image that has R installed on top of Linux. After that, we’ll add our R libraries into a third image. Lastly, we’ll transfer our files to the final image.</p>
+<p>A great thing about Docker is that since so many people use it, you can often find images that other people have made that do what you want to do. In our case, the Rocker project has a ton of Docker images that support R.
+In order to build an image, Docker always looks for a plain text file with no extension called dockerfile.</p>
+<p>To customize our docker container, we first specify our base container. For us, that’s the rocker/r-ver:3.5.0 image. We do this by using the <code>FROM</code> command. Then, we need to install the linux packages that are required for the plumber using linux bash commands. To these commands while setting up the image, we use the <code>RUN</code>. We then install python and the different usefull libraries, and <code>COPY</code> our code in the container.</p>
+<p>And that’s our dockerfile! It builds everything we need to run our API from any machine, regardless of the setup! All together it looks like this:</p>
+<pre><code>FROM rocker/r-ver:3.6.0
+
+# update some packages, including sodium and apache2, then clean
+RUN apt-get update \
+  &amp;&amp; apt-get install -y --no-install-recommends \
+    file \
+    libcurl4-openssl-dev \
+    libedit2 \
+    libssl-dev \
+    lsb-release \
+    psmisc \
+    procps \
+    wget \
+    libxml2-dev \
+    libpq-dev \
+    libssh2-1-dev \
+    ca-certificates \
+    libglib2.0-0 \
+    libxext6 \
+    libsm6  \
+    libxrender1 \
+    bzip2 \
+    libsodium-dev \
+    apache2 \
+    zlib1g-dev \
+    &amp;&amp; wget -O libssl1.0.0.deb http://ftp.debian.org/debian/pool/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u8_amd64.deb \
+    &amp;&amp; dpkg -i libssl1.0.0.deb \
+    &amp;&amp; rm libssl1.0.0.deb \
+    &amp;&amp; apt-get clean \
+    &amp;&amp; rm -rf /var/lib/apt/lists/
+
+# install miniconda, and set the appropriate path variables.
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.6.14-Linux-x86_64.sh -O ~/miniconda.sh &amp;&amp; \
+    /bin/bash ~/miniconda.sh -b -p /opt/conda &amp;&amp; \
+    rm ~/miniconda.sh &amp;&amp; \
+    /opt/conda/bin/conda clean -tipsy &amp;&amp; \
+    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh &amp;&amp; \
+    echo &quot;. /opt/conda/etc/profile.d/conda.sh&quot; &gt;&gt; ~/.bashrc &amp;&amp; \
+    echo &quot;conda activate base&quot; &gt;&gt; ~/.bashrc
+ENV PATH /opt/conda/bin:$PATH
+
+# install tensorflow and h5py using the pip that links to miniconda (the default pip is for python 2.7)
+RUN /opt/conda/bin/pip install --no-cache-dir tensorflow==2.0.0 h5py==2.10.0
+
+# install Pillow to load a unique image
+RUN /opt/conda/bin/pip install PIL
+RUN /opt/conda/bin/pip install Pillow
+
+
+# let R know the right version of python to use
+ENV RETICULATE_PYTHON /opt/conda/bin/python
+
+# copy the setup script, run it, then delete it
+COPY src/setup.R /
+RUN Rscript setup.R &amp;&amp; rm setup.R
+
+# copy all the other R files.
+COPY src /src
+
+EXPOSE 80
+
+WORKDIR /src
+ENTRYPOINT [&quot;Rscript&quot;,&quot;main.R&quot;]</code></pre>
+<p>To build our image, open a terminal in the project folder and run
+`<code>docker build -t r-tensorflow-api .</code></p>
+<p>And in order to run the container :
+<code>docker run --rm -it -p 80:80 r-tensorflow-api</code></p>
+<p>If you want to have this web service running on a server in the cloud, it only takes a few more steps. One way to do this is to use a tool like Amazon Elastic Container Service (ECS). ECS lets you take a container you’ve created and deploy it to AWS. At that point your container is running within AWS systems, and you will get an endpoint that anyone can hit with a browser from anywhere.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-plumber">
+<p>Trestle Technology, LLC. 2018. <em>Plumber: An Api Generator for R</em>. <a href="https://CRAN.R-project.org/package=plumber">https://CRAN.R-project.org/package=plumber</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="deep-learning.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/05-production.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

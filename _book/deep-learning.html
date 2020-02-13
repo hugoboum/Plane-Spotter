@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Part 4 Deep Learning | Smart Data Project</title>
+  <meta name="description" content="This document is our report for the Smart Data Project with Equancy" />
+  <meta name="generator" content="bookdown 0.17.2 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Part 4 Deep Learning | Smart Data Project" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This document is our report for the Smart Data Project with Equancy" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Part 4 Deep Learning | Smart Data Project" />
+  
+  <meta name="twitter:description" content="This document is our report for the Smart Data Project with Equancy" />
+  
+
+<meta name="author" content="Hugo Brehier, Florentin Coeurdoux" />
+
+
+<meta name="date" content="2020-02-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="exploratory-data-analysis.html"/>
+<link rel="next" href="putting-into-production.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#initial-problem"><i class="fa fa-check"></i><b>1.1</b> Initial problem</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#outline"><i class="fa fa-check"></i><b>1.2</b> Outline</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="web-scrapping.html"><a href="web-scrapping.html"><i class="fa fa-check"></i><b>2</b> Web Scrapping</a><ul>
+<li class="chapter" data-level="2.1" data-path="web-scrapping.html"><a href="web-scrapping.html#what-is-web-scraping"><i class="fa fa-check"></i><b>2.1</b> What is Web Scraping?</a></li>
+<li class="chapter" data-level="2.2" data-path="web-scrapping.html"><a href="web-scrapping.html#the-available-data"><i class="fa fa-check"></i><b>2.2</b> The available data</a></li>
+<li class="chapter" data-level="2.3" data-path="web-scrapping.html"><a href="web-scrapping.html#website-extraction"><i class="fa fa-check"></i><b>2.3</b> Website extraction</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>3</b> Exploratory Data Analysis</a><ul>
+<li class="chapter" data-level="3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#load-the-data"><i class="fa fa-check"></i><b>3.1</b> Load the data</a></li>
+<li class="chapter" data-level="3.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#top-constructor"><i class="fa fa-check"></i><b>3.2</b> Top constructor</a></li>
+<li class="chapter" data-level="3.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#top-airlines"><i class="fa fa-check"></i><b>3.3</b> Top airlines</a></li>
+<li class="chapter" data-level="3.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#proportion-of-model-for-airbus"><i class="fa fa-check"></i><b>3.4</b> Proportion of model for Airbus</a></li>
+<li class="chapter" data-level="3.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#proportion-of-model-for-boeing"><i class="fa fa-check"></i><b>3.5</b> Proportion of model for Boeing</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>4</b> Deep Learning</a><ul>
+<li class="chapter" data-level="4.1" data-path="deep-learning.html"><a href="deep-learning.html#overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="deep-learning.html"><a href="deep-learning.html#model"><i class="fa fa-check"></i><b>4.2</b> Model</a></li>
+<li class="chapter" data-level="4.3" data-path="deep-learning.html"><a href="deep-learning.html#performance-check"><i class="fa fa-check"></i><b>4.3</b> Performance check</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="putting-into-production.html"><a href="putting-into-production.html"><i class="fa fa-check"></i><b>5</b> Putting into production</a><ul>
+<li class="chapter" data-level="5.1" data-path="putting-into-production.html"><a href="putting-into-production.html#rest-api-with-plumber"><i class="fa fa-check"></i><b>5.1</b> REST API with Plumber</a></li>
+<li class="chapter" data-level="5.2" data-path="putting-into-production.html"><a href="putting-into-production.html#docker"><i class="fa fa-check"></i><b>5.2</b> Docker</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Smart Data Project</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="deep-learning" class="section level1">
+<h1><span class="header-section-number">Part 4</span> Deep Learning</h1>
+<div id="overview" class="section level2">
+<h2><span class="header-section-number">4.1</span> Overview</h2>
+<p>The fundamental idea which led to the development of CNN, is the idea that detecting an item in an image should trigger a response (neuron activation) without care for the position in the image of the item. Convolutions ,with filters invariant by translation across the image, follow this idea (<span class="citation">Mallat (<a href="#ref-Mallat_2016">2016</a>)</span>).<br />
+By using several convolutions in parallel and in succession, a network is able to learn some features of the data.
+Classification is finally achieved by vectorizing the last layer which feeds a classical multilayer perceptron (MLP).</p>
+<p>The first groundbreaking model is <strong>AlexNet</strong>, developed at the University of Toronto (<span class="citation">Krizhevsky, Sutskever, and Hinton (<a href="#ref-NIPS2012_4824">2012</a>)</span>).
+It achieved first place at ImageNet image classification competition in 2012.</p>
+<div class="figure">
+<img src="AlexNetArch.png" alt="AlexNet" />
+<p class="caption">AlexNet</p>
+</div>
+<p>It has many of the features still used today in popular applications.
+Several techniques to achieve better results are widespread today :</p>
+<ul>
+<li>ReLU (Rectified Linear Unit) activation : <span class="math inline">\(ReLU(x) = max(0,x)\)</span></li>
+<li>Dropout of neurons : some neurons are arbritrarly deactivated</li>
+<li>ensembling several networks</li>
+<li>Data Augmentation : rotations, zooms of images</li>
+<li>Multiple GPUs computation of the backpropagation algorithm (<span class="citation">Rumelhart, Hinton, and Williams (<a href="#ref-Rumelhart:1986we">1986</a>)</span>) .</li>
+</ul>
+<p>For smaller projects, reusing already trained version of popular models on large datasets is also widespread, a technique named ‘pretraining’.
+It usually consists in keeping the convolution layers.</p>
+</div>
+<div id="model" class="section level2">
+<h2><span class="header-section-number">4.2</span> Model</h2>
+<p>After several iterations, we have arrived at a model that uses some advanced techniques.
+We use Keras (<span class="citation">Allaire and Chollet (<a href="#ref-R-keras">2019</a>)</span>) to implement it.
+First, we load a pretrained version on ImageNet dataset of <strong>VGG16, a CNN developed at Oxford</strong> (<span class="citation">Simonyan and Zisserman (<a href="#ref-simonyan2014deep">2014</a>)</span>) .
+It uses ReLU activation, as seen in AlexNet.
+It also uses small, 3 by 3 convolution filters (also named receptive fields), which have been widely adopted in recent years.
+In comparison, AlexNet uses 11 by 11 receptive fields.
+The training is based on logarithmic loss:
+<span class="math display">\[H_{y&#39;} (y) := - \sum_{i} y_{i}&#39; \log (y_i)\]</span>
+<span class="math inline">\(y_i\)</span> is the predicted probability value for class <span class="math inline">\(i\)</span> and <span class="math inline">\(y_i&#39;\)</span> is the true probability for that class.
+Then regularised by L2 weight decay :
+<span class="math display">\[\mbox{Loss}(w,x) = \mbox{RawLoss}(w,x) + \frac{1}{2} \,\, c \,\|w\|^2\]</span>
+On each optimization step in addition to stepping based on a gradient to better fit the training data, all model weights also decay proportionally towards zero by a small factor of <span class="math inline">\((1-\alpha c)\)</span> , with <span class="math inline">\(\alpha\)</span> denoting the learning rate (gradient step).
+The learning rate is also lowered as time passes, and filters are not initialized randomly.
+Dropout (ratio of <span class="math inline">\(0.5\)</span>) is used in fully-connected layers.
+VGG16 structure is as follow.</p>
+<pre><code>## Model
+## Model: &quot;vgg16&quot;
+## ________________________________________________________________________________
+## Layer (type)                        Output Shape                    Param #     
+## ================================================================================
+## input_1 (InputLayer)                [(None, 150, 150, 3)]           0           
+## ________________________________________________________________________________
+## block1_conv1 (Conv2D)               (None, 150, 150, 64)            1792        
+## ________________________________________________________________________________
+## block1_conv2 (Conv2D)               (None, 150, 150, 64)            36928       
+## ________________________________________________________________________________
+## block1_pool (MaxPooling2D)          (None, 75, 75, 64)              0           
+## ________________________________________________________________________________
+## block2_conv1 (Conv2D)               (None, 75, 75, 128)             73856       
+## ________________________________________________________________________________
+## block2_conv2 (Conv2D)               (None, 75, 75, 128)             147584      
+## ________________________________________________________________________________
+## block2_pool (MaxPooling2D)          (None, 37, 37, 128)             0           
+## ________________________________________________________________________________
+## block3_conv1 (Conv2D)               (None, 37, 37, 256)             295168      
+## ________________________________________________________________________________
+## block3_conv2 (Conv2D)               (None, 37, 37, 256)             590080      
+## ________________________________________________________________________________
+## block3_conv3 (Conv2D)               (None, 37, 37, 256)             590080      
+## ________________________________________________________________________________
+## block3_pool (MaxPooling2D)          (None, 18, 18, 256)             0           
+## ________________________________________________________________________________
+## block4_conv1 (Conv2D)               (None, 18, 18, 512)             1180160     
+## ________________________________________________________________________________
+## block4_conv2 (Conv2D)               (None, 18, 18, 512)             2359808     
+## ________________________________________________________________________________
+## block4_conv3 (Conv2D)               (None, 18, 18, 512)             2359808     
+## ________________________________________________________________________________
+## block4_pool (MaxPooling2D)          (None, 9, 9, 512)               0           
+## ________________________________________________________________________________
+## block5_conv1 (Conv2D)               (None, 9, 9, 512)               2359808     
+## ________________________________________________________________________________
+## block5_conv2 (Conv2D)               (None, 9, 9, 512)               2359808     
+## ________________________________________________________________________________
+## block5_conv3 (Conv2D)               (None, 9, 9, 512)               2359808     
+## ________________________________________________________________________________
+## block5_pool (MaxPooling2D)          (None, 4, 4, 512)               0           
+## ================================================================================
+## Total params: 14,714,688
+## Trainable params: 14,714,688
+## Non-trainable params: 0
+## ________________________________________________________________________________</code></pre>
+<p>We keep the convolution/pooling layers, already trained, and replace the fully connected layer with our own.
+The last layer has a sigmoid activation to predict the constructor, either of Airbus or Boeing.</p>
+<pre><code>## Model
+## Model: &quot;sequential&quot;
+## ________________________________________________________________________________
+## Layer (type)                        Output Shape                    Param #     
+## ================================================================================
+## vgg16 (Model)                       (None, 4, 4, 512)               14714688    
+## ________________________________________________________________________________
+## flatten (Flatten)                   (None, 8192)                    0           
+## ________________________________________________________________________________
+## dense (Dense)                       (None, 256)                     2097408     
+## ________________________________________________________________________________
+## dense_1 (Dense)                     (None, 1)                       257         
+## ================================================================================
+## Total params: 16,812,353
+## Trainable params: 16,812,353
+## Non-trainable params: 0
+## ________________________________________________________________________________</code></pre>
+<p>Then, we unfreeze previously frozen layers. This means that some convolution/pooling layers (those after “block3_conv1”) are going to be trained even though its
+original use was to bring its already trained architecture.
+This has shown to boost performance.</p>
+<pre><code>## Model
+## Model: &quot;sequential&quot;
+## ________________________________________________________________________________
+## Layer (type)                        Output Shape                    Param #     
+## ================================================================================
+## vgg16 (Model)                       (None, 4, 4, 512)               14714688    
+## ________________________________________________________________________________
+## flatten (Flatten)                   (None, 8192)                    0           
+## ________________________________________________________________________________
+## dense (Dense)                       (None, 256)                     2097408     
+## ________________________________________________________________________________
+## dense_1 (Dense)                     (None, 1)                       257         
+## ================================================================================
+## Total params: 16,812,353
+## Trainable params: 16,552,193
+## Non-trainable params: 260,160
+## ________________________________________________________________________________</code></pre>
+<p>We perform some data augmentation: rotation, zoom, horizontal flip.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">train_datagen =<span class="st"> </span><span class="kw">image_data_generator</span>(</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">  <span class="dt">rescale =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">255</span>,</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">  <span class="dt">rotation_range =</span> <span class="dv">40</span>,</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">  <span class="dt">width_shift_range =</span> <span class="fl">0.2</span>,</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">  <span class="dt">height_shift_range =</span> <span class="fl">0.2</span>,</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">  <span class="dt">shear_range =</span> <span class="fl">0.2</span>,</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">  <span class="dt">zoom_range =</span> <span class="fl">0.2</span>,</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">  <span class="dt">horizontal_flip =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">  <span class="dt">fill_mode =</span> <span class="st">&quot;nearest&quot;</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">)</a></code></pre></div>
+<p>Skipping some technical details, we arrive at the training step. Here we use binary crossentropy (aka logarithmic loss) as a loss function.
+Moreover, we store classification accuracy, the ratio of number of correct predictions to the total number of images classified.</p>
+<p><span class="math display">\[Acc = \frac{TP + TN}{TP+TN+FP+FN}\]</span>
+where: TP = True positive; FP = False positive; TN = True negative; FN = False negative.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">compile</span>(</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">  <span class="dt">loss =</span> <span class="st">&quot;binary_crossentropy&quot;</span>,</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="dt">optimizer =</span> <span class="kw">optimizer_rmsprop</span>(<span class="dt">lr =</span> <span class="fl">1e-5</span>),</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">&quot;accuracy&quot;</span>)</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">)</a></code></pre></div>
+<p>Then we can train the model.
+Here we used 100 epochs with 100 steps by epoch.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fit_generator</span>(</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">  train_generator,</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">  <span class="dt">steps_per_epoch =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">  <span class="dt">epochs =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">  <span class="dt">validation_data =</span> validation_generator,</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">  <span class="dt">validation_steps =</span> <span class="dv">50</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">)</a></code></pre></div>
+</div>
+<div id="performance-check" class="section level2">
+<h2><span class="header-section-number">4.3</span> Performance check</h2>
+<p>We iterated over several models.
+In the following images, we plot the logarithmic loss and the accuracy, on both the training and validation data for each of them.
+First, we implemented our own convolution layers and fully connected layers.
+In this model, we only use 30 epochs since we do not augment the dataset. Our loss reaches a minimum at around 15 epochs on the validation set.
+The validation accuracy begins to decrease after 25 epochs.
+The model achieves around 80% accuracy.</p>
+<div class="figure">
+<img src="history-CNN-scratch_full.jpg" alt="Introductory model" />
+<p class="caption">Introductory model</p>
+</div>
+
+<p>After this first iteration, we then performed image augmentation, which allow us to use 100 epochs.
+The validation loss reaches a minimum at around 80 epochs.
+However, accuracy on the validation set decreased to 70%.</p>
+<div class="figure">
+<img src="history-CNN-augmented-scratch.jpg" alt="Model with augmented images" />
+<p class="caption">Model with augmented images</p>
+</div>
+
+<p>At this point, we considered adding pretrained convolution layers from VGG16.
+We only train the fully connected layers, thus we use 30 epochs.
+Here, the validation and train loss are curiously intertwined.
+The accuracy does not reach a plateau, and is of 70% at the last epoch.</p>
+<div class="figure">
+<img src="history-CNN-augmented-pretrained.jpg" alt="Model with pretraining" />
+<p class="caption">Model with pretraining</p>
+</div>
+
+<p>Lastly, we unfroze part of VGG16 convolution layers.
+This is the model discussed in the previous part.
+We resort to 100 epochs and observe a more classical loss, with the validation loss going up after 30 epochs while the training one continues downwards.
+The validation accuracy finally reaches 88%, plateauing at 30 epochs with 85% but still slowing growing afterwards.</p>
+<div class="figure">
+<img src="history-CNN-augmented-pretrained-fine-tunning.jpg" alt="Final model" />
+<p class="caption">Final model</p>
+</div>
+
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-keras">
+<p>Allaire, JJ, and François Chollet. 2019. <em>Keras: R Interface to ’Keras’</em>. <a href="https://CRAN.R-project.org/package=keras">https://CRAN.R-project.org/package=keras</a>.</p>
+</div>
+<div id="ref-NIPS2012_4824">
+<p>Krizhevsky, Alex, Ilya Sutskever, and Geoffrey E Hinton. 2012. “ImageNet Classification with Deep Convolutional Neural Networks.” In <em>Advances in Neural Information Processing Systems 25</em>, edited by F. Pereira, C. J. C. Burges, L. Bottou, and K. Q. Weinberger, 1097–1105. Curran Associates, Inc. <a href="http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf">http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf</a>.</p>
+</div>
+<div id="ref-Mallat_2016">
+<p>Mallat, Stéphane. 2016. “Understanding Deep Convolutional Networks.” <em>Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences</em> 374 (2065). The Royal Society: 20150203. <a href="https://doi.org/10.1098/rsta.2015.0203">https://doi.org/10.1098/rsta.2015.0203</a>.</p>
+</div>
+<div id="ref-Rumelhart:1986we">
+<p>Rumelhart, David E., Geoffrey E. Hinton, and Ronald J. Williams. 1986. “Learning Representations by Back-propagating Errors.” <em>Nature</em> 323 (6088): 533–36. <a href="https://doi.org/10.1038/323533a0">https://doi.org/10.1038/323533a0</a>.</p>
+</div>
+<div id="ref-simonyan2014deep">
+<p>Simonyan, Karen, and Andrew Zisserman. 2014. “Very Deep Convolutional Networks for Large-Scale Image Recognition.”</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exploratory-data-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="putting-into-production.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-Deep-Learning.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
